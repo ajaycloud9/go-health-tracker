@@ -41,7 +41,6 @@ USER $GID:$UID
 COPY --from=build /root/go/bin/go-health-app $HOME/go-health-app
 
 ENV CONFIG_FILE_PATH=infra/configs
-# COPY --from=build /Go/src/tagging/infra/configs/config.json $HOME/$CONFIG_FILE_PATH/
 
 EXPOSE $PORT/tcp
 
