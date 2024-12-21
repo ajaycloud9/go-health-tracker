@@ -29,7 +29,7 @@ STOPSIGNAL SIGKILL
 
 # Create a 'user' user in the 'usergroup' group.
 RUN addgroup --gid $GID --system usergroup \
-  && adduser --uid $UID --system --ingroup csgroup user
+  && adduser --uid $UID --system --ingroup usergroup user
 
 # Create logging directories.
 RUN mkdir -p /var/log/gohealth \
