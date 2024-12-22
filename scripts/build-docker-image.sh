@@ -2,9 +2,14 @@
 
 set -ex
 
-DOCKER_TAG="go-health-app:1.0.0"
-CTXT="DockerContext-${DOCKER_TAG}"
+if [ "$#" -ne 2 ]; then
+	echo "Please supply the microservice name and docker tag."
+	exit 1
+fi
 
+SERVICE="$1"
+DOCKER_TAG="$2"
+CTXT="DockerContext-${DOCKER_TAG}"
 
 cleanup() {
 	# Golang making rrr directories...
@@ -23,7 +28,7 @@ cd "$CTXT"
 # make sure we're in the right dir first before registering the cleanup handler
 trap "cleanup" EXIT
 
-for i in src common; do
+for i in "$SERVICE" common; do
 	if [ ! -e "${i}" ]; then
     pwd
     cp -al ../${i} .
@@ -33,4 +38,4 @@ done
 
 echo "BUILDING DOCKER"
 pwd
-docker build -f "src/Dockerfile" -t "${DOCKER_TAG}" .
+docker build -f "${SERVICE}/Dockerfile" -t "${DOCKER_TAG}" .
