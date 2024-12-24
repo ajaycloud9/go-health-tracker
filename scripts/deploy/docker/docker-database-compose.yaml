@@ -1,0 +1,40 @@
+services:
+  backend:
+    image: go-health-backend:1.0.0
+    container_name: go-health-backend-container
+    ports:
+      - "8332:8332"
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=mysecretpassword
+      - DB_NAME=your_database_name
+    restart: always
+    depends_on:
+      - mysql
+
+  frontend:
+    image: go-health-ui:1.0.0
+    container_name: go-health-ui-container
+    ports:
+      - "3000:3000"
+    restart: always
+    depends_on:
+      - backend
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysecretpassword
+      - MYSQL_DATABASE=your_database_name
+      - MYSQL_USER=myuser
+      - MYSQL_PASSWORD=myuserpassword
+    ports:
+      - "3307:3306" # Map MySQL to port 3307 on your local machine to avoid conflict
+    volumes:
+      - mysql_data:/var/lib/mysql # Persist MySQL data
+
+volumes:
+  mysql_data:
