@@ -8,13 +8,20 @@ cd /go-health-tracker/scripts/deploy/helm
 
 Deploy Backend, database and frontend
 ```bash
-cd go-health-tracker
-docker-compose up -d
+cd go-health-tracker/scripts/deploy/docker/
+docker-compose -f docker-compose.yaml up -d
+```
+
+Destroy the services and remove the volumes
+```bash
+cd go-health-tracker/scripts/deploy/docker/
+docker-compose down -f docker-compose.yml -v
 ```
 ### Port list
 ```bash
 BACKEND SERVER  - 8332
 FRONTEND SERVER - 3000
+DATABASE SERVER - 3307
 ```
 
 ```
