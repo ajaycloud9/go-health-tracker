@@ -24,7 +24,7 @@ build_system() {
 }
 
 build_system "src" "go-health-backend" || false
-# build_system "ui" "go-health-ui" || false
+build_system "ui" "go-health-ui" || false
 
 
 BUILD_RC=$?
