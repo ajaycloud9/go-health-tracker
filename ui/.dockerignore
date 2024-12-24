@@ -1,0 +1,7 @@
+go-health-tracker/ui/node_modules
+go-health-tracker/ui/npm-debug.log
+Dockerfile
+.dockerignore
+.git
+.gitignore
+.env
